@@ -11,6 +11,11 @@ from fastapi import HTTPException
 
 mi_app = FastAPI()
 
+@mi_app.get("/")
+async def root():
+    return {"Mensaje" : "HOLA MUNDO DESDE HEROKU"}
+
+
 @mi_app.post("/user/auth/")
 async def auth_user(user_in: UserIn):
     user_in_db = get_user(user_in.username)
