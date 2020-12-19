@@ -10,3 +10,6 @@ class UserOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+def verify_user_in(user_in: UserIn):
+    return ""

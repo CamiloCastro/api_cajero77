@@ -5,11 +5,14 @@ from db.db_connection import get_db
 from db.user_db import UserInDB
 from db.transaction_db import TransactionInDB
 from models.user_models import UserIn, UserOut
-from models.transaction_models import TransactionIn, TransactionOut
+from models.transaction_models import TransactionIn, TransactionOut, verify_transaction
 
 router = APIRouter()
 @router.put("/user/transaction/", response_model=TransactionOut)
 async def make_transaction(transaction_in: TransactionIn, db: Session = Depends(get_db)):
+
+    verify_transaction(transaction_in)
+
     user_in_db = db.query(UserInDB).get(transaction_in.username)
 
     if user_in_db == None:
